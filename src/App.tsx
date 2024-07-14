@@ -1,15 +1,16 @@
 import { useState, useRef, useEffect } from 'react'
 import './App.css'
 import HeroCanvas from './components/HeroCanvas'
-import { drawLine, drawCircle, animateCircle, Coordinates} from './utils/DrawingFunctions'
+import { drawLine, drawCircle, animateCircle, Coordinates, generateRandomCircles, animateCircles} from './utils/DrawingFunctions'
 import { Circle } from './utils/Circle'
 
 function App() {
 
   function handleAnimationStartClick() {
-    const circle = new Circle(10, 10, 10);
-    console.log("Calling animate: ");
-    animateCircle(canvas.current, circle, mouseRef);
+    if (!canvas || !canvas.current) { return; }
+    const canvasBoundaries: Coordinates = {x : canvas.current.width, y : canvas.current.height}
+    const circles: Circle[] = generateRandomCircles(canvasBoundaries, 50, 5);
+    animateCircles(canvas.current, circles, mouseRef);
   }
 
   function handleMouseMove(e: MouseEvent) {

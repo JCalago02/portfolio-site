@@ -1,3 +1,5 @@
+import { Coordinates } from "./DrawingFunctions";
+
 export class Circle {
     #x: number;
     #y: number;
@@ -5,11 +7,11 @@ export class Circle {
     #yVelocity: number;
     #radius: number;
 
-    constructor(x: number, y: number, radius: number) {
-        this.#x = x;
-        this.#y = y;
-        this.#xVelocity = 1;
-        this.#yVelocity = 1;
+    constructor(start: Coordinates, velocity: Coordinates, radius: number = 1) {
+        this.#x = start.x;
+        this.#y = start.y;
+        this.#xVelocity = velocity.x;
+        this.#yVelocity = velocity.y;
         this.#radius = radius;
     }
 
