@@ -59,15 +59,21 @@ export function animateCircles(canvas: HTMLCanvasElement | null, circles: Circle
     requestAnimationFrame(() => {animateCircles(canvas, circles, mouseCoordinatesRef)});
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.strokeStyle = "white";
-    ctx.fillStyle = "#ffffff";
+    ctx.strokeStyle = "#545454";
+    ctx.fillStyle = "#545454";
     for (let counter: number = 0; counter < circles.length; counter++) {
         const circle: Circle = circles[counter];
 
-        const distance: Coordinates = findPointDelta(mouseCoordinatesRef.current, {x: circle.getX(), y:circle.getY()})
-        const velocity: Coordinates = normalizePoint(distance, Math.random() * 3);
-        circle.setXVelocity(velocity.x);
-        circle.setYVelocity(velocity.y);
+        // const distance: Coordinates = findPointDelta(mouseCoordinatesRef.current, {x: circle.getX(), y:circle.getY()})
+        // const velocity: Coordinates = normalizePoint(distance, Math.random() * 3);
+        // circle.setXVelocity(velocity.x);
+        // circle.setYVelocity(velocity.y);
+        if (circle.getX() < -5 || circle.getX() > canvas.width + 5) {
+            circle.setXVelocity(circle.getXVelocity() * -1)
+        }
+        if (circle.getY() < -5 || circle.getY() > canvas.height + 5) {
+            circle.setYVelocity(circle.getYVelocity() * -1)
+        }
         drawCircle(canvas, circle);
         circle.setX(circle.getX() + circle.getXVelocity());
         circle.setY(circle.getY() + circle.getYVelocity());
@@ -105,9 +111,30 @@ export function generateRandomCircles(canvasBoundaries: Coordinates, numCircles:
         
         const startingXVelocity = Math.random() * 2 - 1;
         const startingYVelocity = Math.random() * 2 - 1;
-        const startingVelocity: Coordinates = normalizePoint({x : startingXVelocity, y : startingYVelocity});
+        const startingVelocity: Coordinates = normalizePoint({x : startingXVelocity, y : startingYVelocity}, 0.2);
         const circle: Circle = new Circle(startingCoordinates, startingVelocity, radius);
         circles.push(circle);
     }
     return circles;
+}
+
+export function drawPulse(canvas: HTMLCanvasElement | null, p1: Coordinates, p2: Coordinates, velocity: Coordinates) {
+    if (!canvas) return;
+    const ctx: CanvasRenderingContext2D | null = canvas.getContext('2d');
+    if (!ctx) return;
+    ctx.lineWidth = 5;
+
+    requestAnimationFrame(() => {drawPulse(canvas, p1, p2, velocity)});
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    ctx.beginPath();
+    ctx.moveTo(p1.x - 3*velocity.x, p1.y - 3*velocity.y);
+    p1.x += velocity.x
+    p1.y += velocity.y
+    ctx.lineTo(p1.x, p1.y);
+    ctx.strokeStyle = "white";
+    ctx.stroke();
+    
+
 }

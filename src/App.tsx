@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import './App.css'
 import HeroCanvas from './components/HeroCanvas'
-import { drawLine, drawCircle, animateCircle, Coordinates, generateRandomCircles, animateCircles} from './utils/DrawingFunctions'
+import { drawLine, drawCircle, animateCircle, Coordinates, generateRandomCircles, animateCircles, drawPulse} from './utils/DrawingFunctions'
 import { Circle } from './utils/Circle'
 
 function App() {
@@ -9,8 +9,8 @@ function App() {
   function handleAnimationStartClick() {
     if (!canvas || !canvas.current) { return; }
     const canvasBoundaries: Coordinates = {x : canvas.current.width, y : canvas.current.height}
-    const circles: Circle[] = generateRandomCircles(canvasBoundaries, 50, 5);
-    animateCircles(canvas.current, circles, mouseRef);
+    // animateCircles(canvas.current, generateRandomCircles(canvasBoundaries, 100, 5), mouseRef);
+    drawPulse(canvas.current, {x: 10, y:10}, {x: 0, y:0}, {x: 5, y:5});
   }
 
   function handleMouseMove(e: MouseEvent) {
@@ -53,8 +53,7 @@ function App() {
           </button>
         </div>
         <p>
-          Graduating in 2026 with a Bachelor's in Computer Science from the University of Illinois Urbana-Champaign. I yearn to grow and learn, and love failing fast and iterating quickly. With 
-          my passion for writing performant and elegant software solutions, I'm eagerly pursuing software roles that allow are high impact, dynamically challenging, and make use of my abilities.
+          Graduating in 2026 with a Bachelor's in Computer Science from the University of Illinois Urbana-Champaign with a specialization in scientific, parallel, and high performance computing, I am looking for oppotunities to apply these skills towards real world problems, and to bring my high level of software craftsmanship to the world. 
         </p>
         
         <button onClick={handleAnimationStartClick}>See My Projects:</button>
