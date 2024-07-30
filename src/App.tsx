@@ -1,16 +1,18 @@
 import { useState, useRef, useEffect } from 'react'
 import './App.css'
 import HeroCanvas from './components/HeroCanvas'
-import { drawLine, drawCircle, animateCircle, Coordinates, generateRandomCircles, animateCircles, drawPulse} from './utils/DrawingFunctions'
+import { Coordinates, generateRandomCircles, PulseAnimationProps, CircleAnimationProps, animate} from './utils/DrawingFunctions'
 import { Circle } from './utils/Circle'
 
 function App() {
 
   function handleAnimationStartClick() {
     if (!canvas || !canvas.current) { return; }
-    const canvasBoundaries: Coordinates = {x : canvas.current.width, y : canvas.current.height}
-    // animateCircles(canvas.current, generateRandomCircles(canvasBoundaries, 100, 5), mouseRef);
-    drawPulse(canvas.current, {x: 10, y:10}, {x: 0, y:0}, {x: 5, y:5});
+    const canvasBoundaries: Coordinates = {x : canvas.current.width, y : canvas.current.height};
+    const circles: Circle[] = generateRandomCircles(canvasBoundaries, 100, 5);
+    const circleProps: CircleAnimationProps = {canvas: canvas.current, circles: circles, mouseRef: mouseRef};
+    const pulseProps: PulseAnimationProps = {p1: {x: 10, y: 10}, p2: {x: 0, y: 0}, velocity:{x: 5, y: 5}}
+    animate(canvas.current, circleProps, pulseProps);
   }
 
   function handleMouseMove(e: MouseEvent) {

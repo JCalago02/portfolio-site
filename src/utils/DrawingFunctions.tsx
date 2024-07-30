@@ -3,7 +3,19 @@ import { Circle } from "./Circle";
 export interface Coordinates {
     x: number;
     y: number;
-  }
+}
+
+export interface CircleAnimationProps {
+    canvas: HTMLCanvasElement | null, 
+    circles: Circle[], 
+    mouseRef: React.MutableRefObject<Coordinates | null>
+}
+
+export interface PulseAnimationProps {
+    p1: Coordinates,
+    p2: Coordinates,
+    velocity: Coordinates
+}
 export function drawLine(canvas: HTMLCanvasElement | null) {
     if (!canvas) return;
     const ctx: CanvasRenderingContext2D | null = canvas.getContext('2d');
@@ -29,16 +41,16 @@ export function drawCircle(canvas: HTMLCanvasElement | null, circle: Circle) {
 }
 
 // deprecated? use as reference for mouseCoordinates
-export function animateCircle(canvas: HTMLCanvasElement | null, circle: Circle, mouseCoordinatesRef: React.MutableRefObject<Coordinates | null>) {
+export function animateCircle(canvas: HTMLCanvasElement | null, circle: Circle, mouseRef: React.MutableRefObject<Coordinates | null>) {
     if (!canvas) return;
     const ctx: CanvasRenderingContext2D | null = canvas.getContext('2d');
     if (!ctx) return;
 
-    requestAnimationFrame(() => {animateCircle(canvas, circle, mouseCoordinatesRef)});
+    requestAnimationFrame(() => {animateCircle(canvas, circle, mouseRef)});
     let velocity: Coordinates = {x : 0, y : 0};
-    if (mouseCoordinatesRef.current) {
+    if (mouseRef.current) {
         const circleCoordinates: Coordinates = {x : circle.getX(), y : circle.getY()};
-        const deltaCoordinates: Coordinates = findPointDelta(mouseCoordinatesRef.current, circleCoordinates);
+        const deltaCoordinates: Coordinates = findPointDelta(mouseRef.current, circleCoordinates);
         velocity = normalizePoint(deltaCoordinates, 1);
     }
 
@@ -50,24 +62,33 @@ export function animateCircle(canvas: HTMLCanvasElement | null, circle: Circle, 
     circle.setY(circle.getY() + velocity.y);
 }
 
-export function animateCircles(canvas: HTMLCanvasElement | null, circles: Circle[], mouseCoordinatesRef: React.MutableRefObject<Coordinates | null>) {
-    if (!canvas || !mouseCoordinatesRef.current) return;
-    const ctx: CanvasRenderingContext2D | null = canvas.getContext('2d');
-    if (!ctx) return;
+export function animate(canvasNullable: HTMLCanvasElement | null, circleProps: CircleAnimationProps, pulseProps: PulseAnimationProps) {
+    if (!canvasNullable || !circleProps.mouseRef.current) return;
+    const canvas: HTMLCanvasElement = canvasNullable;
+    const ctxNullable: CanvasRenderingContext2D | null = canvas.getContext('2d');
+    if (!ctxNullable) return;
+    const ctx: CanvasRenderingContext2D = ctxNullable;
     
 
-    requestAnimationFrame(() => {animateCircles(canvas, circles, mouseCoordinatesRef)});
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+        animateCircles(canvas, ctx, circleProps.circles);
+
+        drawPulse(ctx, pulseProps);
+
+        requestAnimationFrame(draw);
+    }
+
+    draw();
+}
+
+function animateCircles(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D, circles: Circle[]) {
     ctx.strokeStyle = "#545454";
     ctx.fillStyle = "#545454";
     for (let counter: number = 0; counter < circles.length; counter++) {
         const circle: Circle = circles[counter];
 
-        // const distance: Coordinates = findPointDelta(mouseCoordinatesRef.current, {x: circle.getX(), y:circle.getY()})
-        // const velocity: Coordinates = normalizePoint(distance, Math.random() * 3);
-        // circle.setXVelocity(velocity.x);
-        // circle.setYVelocity(velocity.y);
         if (circle.getX() < -5 || circle.getX() > canvas.width + 5) {
             circle.setXVelocity(circle.getXVelocity() * -1)
         }
@@ -79,7 +100,19 @@ export function animateCircles(canvas: HTMLCanvasElement | null, circles: Circle
         circle.setY(circle.getY() + circle.getYVelocity());
         
     }
+}
 
+function drawPulse(ctx: CanvasRenderingContext2D, pulseProps: PulseAnimationProps) {
+    const p1: Coordinates = pulseProps.p1;
+    const p2: Coordinates = pulseProps.p2;
+    const velocity: Coordinates = pulseProps.velocity;
+    ctx.beginPath();
+    ctx.moveTo(p1.x - 3*velocity.x, p1.y - 3*velocity.y);
+    p1.x += velocity.x
+    p1.y += velocity.y
+    ctx.lineTo(p1.x, p1.y);
+    ctx.strokeStyle = "white";
+    ctx.stroke();
 }
 
 export function findDistance(p1: Coordinates, p2: Coordinates) {
@@ -116,25 +149,4 @@ export function generateRandomCircles(canvasBoundaries: Coordinates, numCircles:
         circles.push(circle);
     }
     return circles;
-}
-
-export function drawPulse(canvas: HTMLCanvasElement | null, p1: Coordinates, p2: Coordinates, velocity: Coordinates) {
-    if (!canvas) return;
-    const ctx: CanvasRenderingContext2D | null = canvas.getContext('2d');
-    if (!ctx) return;
-    ctx.lineWidth = 5;
-
-    requestAnimationFrame(() => {drawPulse(canvas, p1, p2, velocity)});
-
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    ctx.beginPath();
-    ctx.moveTo(p1.x - 3*velocity.x, p1.y - 3*velocity.y);
-    p1.x += velocity.x
-    p1.y += velocity.y
-    ctx.lineTo(p1.x, p1.y);
-    ctx.strokeStyle = "white";
-    ctx.stroke();
-    
-
 }
