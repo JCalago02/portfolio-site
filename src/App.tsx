@@ -11,7 +11,7 @@ function App() {
     const canvasBoundaries: Coordinates = {x : canvas.current.width, y : canvas.current.height};
     const circles: Circle[] = generateRandomCircles(canvasBoundaries, 100, 5);
     const circleProps: CircleAnimationProps = {canvas: canvas.current, circles: circles, mouseRef: mouseRef};
-    const pulseProps: PulseAnimationProps = {p1: {x: 10, y: 10}, p2: {x: 0, y: 0}, velocity:{x: 5, y: 5}}
+    const pulseProps: PulseAnimationProps = {curr: {x: 0, y: 0}, goal: {x: 500, y: 500}, velocity:{x: 5, y: 5}}
     animate(canvas.current, circleProps, pulseProps);
   }
 

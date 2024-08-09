@@ -12,8 +12,8 @@ export interface CircleAnimationProps {
 }
 
 export interface PulseAnimationProps {
-    p1: Coordinates,
-    p2: Coordinates,
+    curr: Coordinates,
+    goal: Coordinates,
     velocity: Coordinates
 }
 export function drawLine(canvas: HTMLCanvasElement | null) {
@@ -26,7 +26,6 @@ export function drawLine(canvas: HTMLCanvasElement | null) {
     ctx.lineTo(300, 100);
     ctx.strokeStyle = "blue";
     ctx.stroke();
-    console.log("In function");
 }
 
 export function drawCircle(canvas: HTMLCanvasElement | null, circle: Circle) {
@@ -68,7 +67,7 @@ export function animate(canvasNullable: HTMLCanvasElement | null, circleProps: C
     const ctxNullable: CanvasRenderingContext2D | null = canvas.getContext('2d');
     if (!ctxNullable) return;
     const ctx: CanvasRenderingContext2D = ctxNullable;
-    
+   
 
     function draw() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -103,16 +102,24 @@ function animateCircles(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D
 }
 
 function drawPulse(ctx: CanvasRenderingContext2D, pulseProps: PulseAnimationProps) {
-    const p1: Coordinates = pulseProps.p1;
-    const p2: Coordinates = pulseProps.p2;
+    const start: Coordinates = pulseProps.curr;
+    const goal: Coordinates = pulseProps.goal;
     const velocity: Coordinates = pulseProps.velocity;
+    const end: Coordinates = {x: start.x + 2*velocity.x, y: start.y + 2*velocity.y };
+    
     ctx.beginPath();
-    ctx.moveTo(p1.x - 3*velocity.x, p1.y - 3*velocity.y);
-    p1.x += velocity.x
-    p1.y += velocity.y
-    ctx.lineTo(p1.x, p1.y);
+    ctx.moveTo(start.x, start.y);
+    start.x += velocity.x
+    start.y += velocity.y
+    ctx.lineTo(end.x, end.y);
     ctx.strokeStyle = "white";
     ctx.stroke();
+
+    if (findDistance(end, goal) < 1) {
+        pulseProps.goal = {x: 700, y: 500};
+        pulseProps.velocity = normalizePoint(findPointDelta(pulseProps.goal, pulseProps.curr), 6);
+    }
+
 }
 
 export function findDistance(p1: Coordinates, p2: Coordinates) {
