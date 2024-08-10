@@ -1,4 +1,4 @@
-import { Coordinates } from "./DrawingFunctions";
+import { Coordinates } from "./Calculations";
 
 export class Circle {
     #x: number;
@@ -53,5 +53,18 @@ export class Circle {
 
     toString(): string {
         return `x: ${this.#x}, y: ${this.#y}, r: ${this.#radius}`;
+    }
+
+    getCoordinates(): Coordinates {
+        return {x: this.#x, y: this.#y};
+    }
+
+    getVeocity(): Coordinates {
+        return {x: this.#xVelocity, y: this.#yVelocity};
+    }
+
+    setVelocity(velocity: Coordinates) {
+        this.#xVelocity = velocity.x;
+        this.#yVelocity = velocity.y;
     }
 }

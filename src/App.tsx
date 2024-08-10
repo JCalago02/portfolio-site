@@ -1,7 +1,8 @@
 import { useState, useRef, useEffect } from 'react'
 import './App.css'
 import HeroCanvas from './components/HeroCanvas'
-import { Coordinates, generateRandomCircles, PulseAnimationProps, CircleAnimationProps, animate} from './utils/DrawingFunctions'
+import {Coordinates, generateRandomCircles} from './utils/Calculations';
+import { CircleAnimationProps, PulseAnimationProps, animate } from './utils/Animations';
 import { Circle } from './utils/Circle'
 
 function App() {
@@ -10,8 +11,10 @@ function App() {
     if (!canvas || !canvas.current) { return; }
     const canvasBoundaries: Coordinates = {x : canvas.current.width, y : canvas.current.height};
     const circles: Circle[] = generateRandomCircles(canvasBoundaries, 100, 5);
+    const pulseStart: Circle = new Circle({x: 0, y: 0}, {x: 1, y: 1}, 1);
+
     const circleProps: CircleAnimationProps = {canvas: canvas.current, circles: circles, mouseRef: mouseRef};
-    const pulseProps: PulseAnimationProps = {curr: {x: 0, y: 0}, goal: {x: 500, y: 500}, velocity:{x: 5, y: 5}}
+    const pulseProps: PulseAnimationProps = {pulse: pulseStart, goalI: 0, circles: circles}
     animate(canvas.current, circleProps, pulseProps);
   }
 
