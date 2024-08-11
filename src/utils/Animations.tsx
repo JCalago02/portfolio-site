@@ -1,5 +1,6 @@
 import { Coordinates, normalizePoint, findPointDelta, pulseCrossesOver } from "./Calculations";
 import { Circle } from "./Circle";
+import { getColor } from "./Colors";
 import { drawCircle, drawPulse } from "./Drawings";
 
 export interface CircleAnimationProps {
@@ -15,9 +16,7 @@ export interface PulseAnimationProps {
 }
 
 
-export function animate(canvasNullable: HTMLCanvasElement | null, circleProps: CircleAnimationProps, pulseProps: PulseAnimationProps) {
-    if (!canvasNullable || !circleProps.mouseRef.current) return;
-    const canvas: HTMLCanvasElement = canvasNullable;
+export function animate(canvas: HTMLCanvasElement, circleProps: CircleAnimationProps, pulseProps: PulseAnimationProps) {
     const ctxNullable: CanvasRenderingContext2D | null = canvas.getContext('2d');
     if (!ctxNullable) return;
     const ctx: CanvasRenderingContext2D = ctxNullable;
@@ -37,8 +36,7 @@ export function animate(canvasNullable: HTMLCanvasElement | null, circleProps: C
 }
 
 function animateCircles(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D, circles: Circle[]) {
-    ctx.strokeStyle = "#545454";
-    ctx.fillStyle = "#545454";
+    ctx.strokeStyle = ctx.fillStyle = getColor("dim-stroke");
     for (let counter: number = 0; counter < circles.length; counter++) {
         const circle: Circle = circles[counter];
         
@@ -77,12 +75,12 @@ function animatePulse(ctx: CanvasRenderingContext2D, pulseProps: PulseAnimationP
     drawPulse(ctx, pulse); 
 }
 
-export function animateCircle(canvas: HTMLCanvasElement | null, circle: Circle, mouseRef: React.MutableRefObject<Coordinates | null>) {
+export function animateCircleFollowMouse(canvas: HTMLCanvasElement | null, circle: Circle, mouseRef: React.MutableRefObject<Coordinates | null>) {
     if (!canvas) return;
     const ctx: CanvasRenderingContext2D | null = canvas.getContext('2d');
     if (!ctx) return;
 
-    requestAnimationFrame(() => {animateCircle(canvas, circle, mouseRef)});
+    requestAnimationFrame(() => {animateCircleFollowMouse(canvas, circle, mouseRef)});
     let velocity: Coordinates = {x : 0, y : 0};
     if (mouseRef.current) {
         const circleCoordinates: Coordinates = {x : circle.getX(), y : circle.getY()};

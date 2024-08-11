@@ -1,6 +1,7 @@
 import { getPulseEndpoint } from "./Calculations";
 import { Circle } from "./Circle";
 import { Coordinates } from "./Calculations";
+import { getColor } from "./Colors";
 
 export function drawLine(ctx: CanvasRenderingContext2D) {
 
@@ -26,6 +27,6 @@ export function drawPulse(ctx: CanvasRenderingContext2D, pulse: Circle) {
     const endPoint: Coordinates = getPulseEndpoint(pulse);
 
     ctx.lineTo(endPoint.x, endPoint.y);
-    ctx.strokeStyle = "white";
+    ctx.strokeStyle = getColor("bold-stroke");
     ctx.stroke();
 }

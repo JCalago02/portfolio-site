@@ -1,5 +1,5 @@
 .hero-canvas {
-    position: absolute;
+    overflow-x: hidden;
     top: 0px;
     left: 0px;
     border: 1px solid white;
