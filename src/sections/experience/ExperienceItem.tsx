@@ -37,7 +37,7 @@ export function ExperienceItem({
                 <div className="experience-tech-container">
                     {
                         technologies.map((tech, key) => (
-                            <div key={"exp-t" + id + key}>{tech}</div>
+                            <div key={"exp-t" + id + key} className="experience-tech-card">{tech}</div>
                         ))
                     }
                 </div>                    
