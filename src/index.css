@@ -1,19 +1,20 @@
 :root {
   font-family: 'Inter', monospace, sans-serif;
-  line-height: 1.5;
+  line-height: 1;
   font-size: 1.2rem;
   font-weight: 200;
   margin: 0;
   color-scheme: light dark;
   color: var(--text-color);
-  background-color: var(--background-color);
+  background-color: var(--background-one);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  --background-color: #F0F0F0;
+  --background-one: #FFFFFF;
+  --background-two: #F6F5F4;
   --button-hover: rgba(226, 226, 226, 0.8);
   --text-color: rgba(0, 0, 0, 0.87);
   --primary-color: #cc1203;
@@ -22,6 +23,8 @@
 }
 
 button {
+  font-family: 'Inter', monospace, sans-serif;
+  line-height: 1.5;
   border: 1px solid var(--bold-stroke);
   border-width: 0 1px;
   background-color: transparent;
@@ -42,4 +45,14 @@ button:hover {
   --primary-color: #bb86fc;
   --dim-stroke: #545454;
   --bold-stroke: #FFF;
+}
+
+h2 {
+  margin: 0;
+}
+
+p {
+  margin: 0;
+  line-height: 1.25rem;
+  padding-bottom: 0.25rem;
 }

@@ -1,4 +1,5 @@
 import './App.css'
+import Experience from './sections/experience/Experience';
 import HeroCanvas from './sections/hero/HeroCanvas'
 import HeroInfo from './sections/hero/HeroInfo';
 
@@ -8,7 +9,7 @@ function App() {
       <div className="mouse-move-wrapper-div">
         <HeroInfo></HeroInfo>
         <HeroCanvas></HeroCanvas>
-        <div>Testing placing an element below</div>
+        <Experience></Experience> 
       </div>
     </>
   )

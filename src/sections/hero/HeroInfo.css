@@ -1,9 +1,17 @@
-.hero-info {
+.hero-section{
     position: absolute;
     text-align: center; 
     letter-spacing: 0.1rem;
+    line-height: 1.5rem;
     width: 100%;
-
+    
     top: 50%;
     transform: translate(0, -50%);
+}
+
+.hero-button-row {
+    display: flex;
+    margin: 0 auto; 
+    width: fit-content;
+    column-gap: 5rem;
 }
