@@ -43,3 +43,22 @@ p {
   line-height: 1.25rem;
   padding-bottom: 0.25rem;
 }
+
+
+.button-link {
+    padding: 0.2rem 1rem;
+
+    border: 1px solid transparent;
+    border-radius: 8px;
+    background-color: var(--primary-color);
+
+    text-decoration: none;
+    color: var(--text-color-light);
+
+    transition: all 0.3s ease-in-out;
+}
+
+.button-link:hover {
+    background-color: var(--secondary-color);
+    cursor: pointer;
+}

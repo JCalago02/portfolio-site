@@ -15,9 +15,10 @@ export default function HeroInfo() {
                 Bachelor's Student in Computer Science • Passionate About Data Driven Systems • Aspiring Backend Developer  
             </p> 
             <div className="hero-button-row">
+                <button className="hero-button">About Me</button> 
                 <button className="hero-button" onClick={() => scrollToElement("experience-section")}>My Experience</button>
                 <button className="hero-button" onClick={() => scrollToElement("projects-section")}>My Projects</button>
-                <button className="hero-button">Contact Me</button>
+                <button className="hero-button" onClick={() => scrollToElement("contact-section")}>Contact Me</button>
             </div>
                 
         </div>

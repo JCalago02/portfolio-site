@@ -2,6 +2,7 @@
     display: flex;
     align-items: center;
     margin-bottom: 3rem;
+    margin-top: 3.5rem;
 }
 
 .experience-title-text {
@@ -29,7 +30,7 @@
 .experience-tech-container {
     display: flex;
     column-gap: 1rem;
-    padding-top: 1%;
+    padding-top: 0.75rem;
 }
 
 .experience-tech-card {

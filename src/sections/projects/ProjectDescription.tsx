@@ -11,7 +11,7 @@ export default function ProjectDescription({activeValue} : {activeValue: number}
                     <a 
                         href={activeProject.link} 
                         target="_blank" 
-                        className="project-link"
+                        className="button-link project-link"
                     >
                             See Source
                     </a>

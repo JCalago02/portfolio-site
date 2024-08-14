@@ -1,0 +1,16 @@
+.contact-section{
+    padding: 5rem 10rem 5rem 10rem;
+    background-color: var(--background-two);
+}
+
+.contact-flex-container {
+    display: flex;
+    padding-top: 1rem;
+    column-gap: 1rem;
+}
+
+.contact-link {
+    display: flex;
+    align-items: center;
+    column-gap: 0.4rem;
+}

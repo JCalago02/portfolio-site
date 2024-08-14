@@ -14,11 +14,15 @@ export default function Projects() {
             date: project.date,
             isSelected: (selectedProject === project.id),
             clickHandler: () => {
-                setInTransition(true); 
-                setTimeout(() => {
-                    setSelectedProject(project.id);
-                    setInTransition(false); 
-                }, 200);
+
+                const projectChanging: boolean = project.id != selectedProject; 
+                if (projectChanging) {
+                    setInTransition(true);
+                    setTimeout(() => {
+                        setSelectedProject(project.id);
+                        setInTransition(false); 
+                    }, 200);
+                }
             }
         }
         return props;
