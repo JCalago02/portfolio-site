@@ -5,7 +5,7 @@ import { projects, projectContent } from "../../content/ProjectsContent";
 import ProjectDescription from "./ProjectDescription";
 
 export default function Projects() {
-    const [selectedProject, setSelectedProject] = useState(1);
+    const [selectedProject, setSelectedProject] = useState(0);
     const [inTransition, setInTransition] = useState(false); 
     function mapProjectToItemProps(project: projectContent) {
         const props = {

@@ -5,7 +5,7 @@ export default function Contact() {
     return (
         <div className="contact-section">
             <h1>Contact Me</h1>
-            <p>My communication channels, created to keep me connected.</p>
+            <p>My communication channels, created to keep me connected</p>
             <div className="contact-flex-container">
                 {
                     contactDetails.map((detail, key) => (

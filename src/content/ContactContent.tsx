@@ -1,3 +1,7 @@
+import linkedinUrl from "/LinkedInIcon.svg";
+import githubUrl from "/GithubIcon.svg";
+import emailUrl from "/EmailIcon.svg";
+
 export interface ContactDetail {
     label: string,
     img: string,
@@ -6,19 +10,19 @@ export interface ContactDetail {
 
 const linkedIn: ContactDetail = {
     label: "LinkedIn",
-    img: "/LinkedInIcon.svg",
+    img: linkedinUrl,
     url: "https://www.linkedin.com/in/jcala02/"
 }
 
 const github: ContactDetail = {
     label: "GitHub",
-    img: "/GithubIcon.svg",
+    img: githubUrl,
     url: "https://github.com/JCalago02"
 }
 
 const email: ContactDetail = {
     label: "Email",
-    img: "/EmailIcon.svg",
+    img: emailUrl,
     url: "mailto:jcalago02@gmail.com"
 }
 
