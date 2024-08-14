@@ -1,5 +1,5 @@
 import "./HeroCanvas.css"
-import { useRef, useEffect, useCallback } from "react";
+import { useRef, useCallback } from "react";
 import { Coordinates, generateRandomCircles } from "../../utils/Calculations";
 import { CircleAnimationProps, PulseAnimationProps, animate } from "../../utils/Animations";
 import { Circle } from "../../utils/Circle";
@@ -7,14 +7,14 @@ import { Circle } from "../../utils/Circle";
 export default function HeroCanvas() {
     const mouseRef: React.MutableRefObject<Coordinates | null> = useRef(null);
     
-    function handleMouseMove(e: MouseEvent) {
+    // function handleMouseMove(e: MouseEvent) {
        // if (canvas.current) {
        // const canvasRect = canvas.current.getBoundingClientRect();
        // const canvasX = e.clientX - canvasRect.left;
        // const canvasY = e.clientY - canvasRect.top;
        // mouseRef.current = {x : canvasX, y : canvasY};
        // }
-    }
+    // }
      
     function handleAnimationStartClick(canvas: HTMLCanvasElement) {
         console.log("Handle start called"); 
