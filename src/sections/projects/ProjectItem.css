@@ -1,0 +1,25 @@
+.project-item-label {
+    padding: 0.5rem 5rem 0.5rem 1rem;
+    margin-bottom: 1.5rem;
+    border-left: 1px solid var(--text-color-light);
+}
+
+.project-item-label:hover {
+    cursor: pointer;
+}
+
+.project-item-date {
+    font-size: 65%;
+    line-height: 65%;
+    padding-top: 0.1%
+}
+
+.project-item-title {
+    font-size: 130%;
+    line-height: 125%;
+}
+
+
+.project-highlight {
+    border-color: var(--primary-color)
+}

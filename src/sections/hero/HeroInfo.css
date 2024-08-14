@@ -15,3 +15,21 @@
     width: fit-content;
     column-gap: 5rem;
 }
+
+
+.hero-button {
+    font-family: 'Inter', monospace, sans-serif;
+    line-height: 1.5;
+    border: 1px solid var(--bold-stroke);
+    border-width: 0 1px;
+    background-color: transparent;
+    padding: 1rem 0.5rem;
+    text-decoration: underline;
+    transition: all 0.3s ease-in-out;
+}
+
+.hero-button:hover {
+    border-color: transparent;
+    background-color: var(--button-hover);
+    cursor: pointer;
+}

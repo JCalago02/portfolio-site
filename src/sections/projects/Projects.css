@@ -1,0 +1,31 @@
+.projects-section {
+    padding: 10%;
+    background-color: var(--background-three);
+    color: var(--text-color-light)
+}
+
+.projects-header-text {
+    padding-bottom: 3.5rem;
+}
+
+.projects-flexbox {
+    display: flex;
+    width: 100%;
+}
+
+.projects-flexbox-l {
+    flex: 1;
+}
+
+.projects-flexbox-r {
+    flex: 1;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.projects-flexbox-r.hide {
+    opacity: 0;
+}
+.projects-flexbox-r.show {
+    opacity: 1;
+    transition-delay: 0.2s; 
+}

@@ -14,30 +14,17 @@
   -moz-osx-font-smoothing: grayscale;
 
   --background-one: #FFFFFF;
-  --background-two: #F6F5F4;
+  --background-two: #F1F3F4;
+  --background-three: #779ECC;
   --button-hover: rgba(226, 226, 226, 0.8);
   --text-color: rgba(0, 0, 0, 0.87);
-  --primary-color: #cc1203;
+  --text-color-light: rgba(255, 255, 255, 0.87);
+  --primary-color: #ed684a; 
+  --secondary-color:#F2C894; 
+  --tertiary-color: #9FC0DE;
   --dim-stroke: rgba(171, 171, 171, 0.8);
-  --bold-stroke: #000;
 }
 
-button {
-  font-family: 'Inter', monospace, sans-serif;
-  line-height: 1.5;
-  border: 1px solid var(--bold-stroke);
-  border-width: 0 1px;
-  background-color: transparent;
-  padding: 1rem 0.5rem;
-
-  transition: all 0.3s ease-in-out;
-}
-
-button:hover {
-  border-color: transparent;
-  background-color: var(--button-hover);
-  cursor: pointer;
-}
 
 [data-theme="dark"] {
   --background-color:#0F0F0F;
